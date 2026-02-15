@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL ?? 'https://sage-web-sand.vercel.app';
 const MAP_URL = process.env.NEXT_PUBLIC_MAP_URL ?? 'https://sage-map.vercel.app/map';
-const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? '#';
+const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL ?? 'https://solanogis.mintlify.app';
 
 export default function Home() {
   return (
@@ -19,9 +19,9 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <a
               href={DOCS_URL}
-              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors hidden sm:block"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
-              Docs
+              Documentation
             </a>
             <a
               href={MAP_URL}
@@ -42,65 +42,166 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      {/* Hero */}
+      <header className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-xs font-semibold uppercase tracking-wider mb-6">
-            <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-            SAGE v1.0
-          </div>
-          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-            The Intelligence Layer for{' '}
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+            AI-Assisted GIS for{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-emerald-600">
               Solano County
             </span>
           </h1>
-          <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            An AI that understands Solano County the way a veteran employee does — parcels, zoning, hazards, regulations, budget — and can explain any location in that full context.
+          <p className="text-xl text-slate-600 mb-4 max-w-3xl mx-auto leading-relaxed">
+            SAGE connects an AI assistant to Solano County&apos;s live GIS services, public records,
+            and an interactive ArcGIS map. The AI and user share the same map — when the AI
+            highlights parcels or toggles layers, you see it happen. When you click a feature,
+            the AI sees the result.
+          </p>
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10">
+            59 tools across four independent services. Property research, regulatory analysis,
+            spatial queries, aerial vision, budget and staffing, Board decision tracking — all
+            accessible through natural language.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={CHAT_URL}
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl transition-all shadow-lg shadow-teal-600/20 hover:shadow-xl hover:shadow-teal-600/30 hover:-translate-y-0.5"
+              href={DOCS_URL}
+              className="inline-flex items-center justify-center px-8 py-3.5 bg-teal-600 hover:bg-teal-700 text-white text-lg font-semibold rounded-xl transition-all shadow-lg shadow-teal-600/20 hover:shadow-xl hover:shadow-teal-600/30"
             >
-              Try SAGE
+              Read the Documentation
             </a>
             <a
-              href="#capabilities"
+              href="#how-it-works"
               className="inline-flex items-center justify-center px-8 py-3.5 bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-lg font-semibold rounded-xl transition-all shadow-sm"
             >
-              See Capabilities
+              How It Works
             </a>
           </div>
         </div>
       </header>
 
-      {/* The Integration Layer Concept */}
+      {/* The Shared Map */}
+      <section id="how-it-works" className="py-20 bg-white border-y border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">
+                AI That Works <em>With</em> the Map,<br />
+                <span className="text-teal-600">Not Alongside It</span>
+              </h2>
+              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                Most AI+GIS approaches give the AI a separate renderer. SAGE takes a different approach:
+                the AI controls the same ArcGIS map the user sees. It navigates, toggles layers, highlights
+                parcels, and captures screenshots for its own analysis — all on the shared view.
+              </p>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                This means conversations are genuinely spatial. The AI can detect objects in aerial imagery,
+                cross-reference what it sees with parcel data, and explain findings in context. A single
+                question can trigger a multi-step analysis: navigate to a location, switch to 2025 aerials,
+                identify structures, pull property records, check zoning and hazards.
+              </p>
+              <ul className="space-y-4">
+                <FeatureItem>30+ data layers including aerials from 2004 to 2025</FeatureItem>
+                <FeatureItem>AI vision detection — identifies buildings, pools, solar panels, aircraft in aerial imagery</FeatureItem>
+                <FeatureItem>Autonomous tool chaining — AI decides what to query next based on what it finds</FeatureItem>
+              </ul>
+            </div>
+            <div className="relative">
+              <a
+                href={`${MAP_URL}?preset=planning&apn=0027030010,0027040010`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl overflow-hidden shadow-2xl border border-slate-200 hover:shadow-3xl transition-shadow group"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/site-selection-map.png"
+                  alt="Interactive map showing parcels highlighted in orange in Suisun Valley with zoning and boundary overlays"
+                  className="w-full h-auto"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                  <p className="text-white text-sm font-medium">
+                    Candidate parcels highlighted in Suisun Valley — AI filtered 163 parcels by zoning and flood risk
+                  </p>
+                  <p className="text-white/70 text-xs mt-1 group-hover:text-white transition-colors">
+                    Click to open interactive map &rarr;
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What It Connects */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">What It Connects</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              County data is spread across many systems. SAGE queries them through a single conversation,
+              connecting results that would normally require separate lookups.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <CapabilityCard
+              title="Property Research"
+              description="Any address or APN returns parcel details, assessment data, building characteristics, zoning, flood zone, fire hazard, elevation, special districts, and nearby amenities. Automatic jurisdiction routing — mailing address city ≠ legal jurisdiction."
+            />
+            <CapabilityCard
+              title="Spatial Analysis"
+              description="Query any visible map layer: counts, breakdowns, statistics, filtered samples. 'How many agricultural parcels over 20 acres in this view?' answered by querying the actual FeatureServer, not cached data."
+            />
+            <CapabilityCard
+              title="Regulatory Lookup"
+              description="Full-text search across the Solano County Code — zoning (166 sections), subdivisions, grading, parks, underground utilities. Returns actual legal text with section citations."
+            />
+            <CapabilityCard
+              title="General Plan"
+              description="Search the 2008 General Plan across 12 chapters: land use, agriculture, housing, transportation, resources, economic development. Find specific policies, goals, and implementation programs."
+            />
+            <CapabilityCard
+              title="Budget & Staffing"
+              description="FY2025-26 Recommended Budget by department. 3,284 county positions with FTE, job classifications, salary grades, and organizational structure."
+            />
+            <CapabilityCard
+              title="Board of Supervisors"
+              description="Search meeting agendas and minutes by topic, committee, or date. Identify past decisions, resolutions, and action items."
+            />
+            <CapabilityCard
+              title="Aerial Vision"
+              description="AI analyzes map screenshots using Gemini Flash to detect objects in aerial imagery — buildings, pools, solar panels, specific structures. Returns real-world coordinates for follow-up queries."
+            />
+            <CapabilityCard
+              title="Driving & Proximity"
+              description="Route calculations, travel time, and point-of-interest search. Schools, parks, fire stations, hospitals, libraries, and transit stops within a specified radius."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Example Interaction */}
       <section className="py-20 bg-white border-y border-slate-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                Not just data retrieval. <br />
-                <span className="text-teal-600">True Integration.</span>
+                Example: Secondary Dwelling Eligibility
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                In the 90s, GIS solved the spatial silo problem by using <strong>location</strong> as the common key.
-                Today, SAGE solves the operational silo problem using <strong>natural language</strong>.
+                A single question triggers three tool calls. The AI geocodes the address, checks
+                zoning with automatic jurisdiction routing, and searches the County Code — then
+                synthesizes the results into a direct answer with citations.
               </p>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                Property data lives in the Assessor's system. Zoning in Planning. Flood zones at FEMA. Fire hazard at CAL FIRE. The County Code in one database, the General Plan in another, the budget in a third. SAGE connects them all — so one question can pull from six sources without six separate lookups.
+              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                Notice the jurisdiction correction: the user said &ldquo;Fairfield&rdquo; but the
+                parcel is actually in unincorporated Solano County. SAGE catches this because it
+                checks the legal boundary, not the mailing address.
               </p>
-              <ul className="space-y-4">
-                <FeatureItem>Parcel queries that include hazards, districts, and code citations</FeatureItem>
-                <FeatureItem>Permit research that traces policy to regulation to budget</FeatureItem>
-                <FeatureItem>Institutional knowledge encoded in tool behavior, not just documentation</FeatureItem>
-              </ul>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-teal-50 to-emerald-50 rounded-2xl transform rotate-3 scale-105 opacity-70"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-teal-50 to-emerald-50 rounded-2xl transform rotate-2 scale-105 opacity-70"></div>
               <div className="relative rounded-2xl shadow-2xl overflow-hidden border border-slate-700 bg-slate-800">
-                {/* User Query */}
                 <div className="px-5 py-4 border-b border-slate-700">
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5" style={{ backgroundColor: 'rgb(0, 151, 129)' }}>
@@ -112,7 +213,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Tool Calls */}
                 <div className="px-5 py-3 border-b border-slate-700 flex flex-wrap gap-2">
                   {['Geocode Address', 'Get Zoning', 'Search County Code'].map((tool) => (
                     <div
@@ -125,7 +225,6 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* Result */}
                 <div className="px-5 py-4 text-[15px] leading-relaxed text-slate-300">
                   <p className="mb-3">
                     <strong className="text-slate-100">Matched Address:</strong> 2849 Rockville Road (APN 015-028-0080)
@@ -146,186 +245,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Scenarios */}
-      <section id="capabilities" className="py-20 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">Built for Real County Workflows</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              SAGE handles the edge cases that trip up basic LLMs — like mailing addresses that don't match legal jurisdictions.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <ScenarioCard
-              icon="&#9878;"
-              title="Jurisdiction Routing"
-              question="What's the zoning for 2500 Cordelia Road in Fairfield?"
-              result="Identifies the parcel is actually in Unincorporated Solano County (ISD), not City of Fairfield. Routes query to County zoning tools instead of City tools. Prevents misinformation."
-            />
-            <ScenarioCard
-              icon="&#127968;"
-              title="Short-Term Rental Eligibility"
-              question="Can I rent my cabin near Green Valley as an Airbnb?"
-              result="Checks fire hazard zone (Very High = prohibited, High = conditional), confirms structure isn't an ADU or secondary dwelling, verifies road access. Multi-factor eligibility — not a simple yes/no."
-            />
-            <ScenarioCard
-              icon="&#9889;"
-              title="Multi-Source Analysis"
-              question="Give me a complete property profile for 4300 Suisun Valley Road."
-              result="Pulls parcel data, zoning, flood zone, fire hazard, special districts, and relevant General Plan policies in one query. Synthesizes 6 data sources into a single assessment."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* What You Can Do */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">What You Can Do With SAGE</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Not just data access — integrated analysis across county systems.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <CapabilityCard
-              title="Site Selection & Feasibility"
-              description="Complex site queries that would take hours become seconds. 'Find 20+ acre parcels in Suisun Valley zoned for wineries, outside flood zones, with road frontage' — answered with full regulatory context."
-            />
-            <CapabilityCard
-              title="Zoning & Permit Analysis"
-              description="Ask 'what permits does a winery need?' and get a matrix by size, grape sourcing, and zone — synthesized from 365 pages of zoning regulations. Not keyword search. Actual regulatory analysis."
-            />
-            <CapabilityCard
-              title="Regulation Lookup"
-              description="Search the County Code by keyword and get the actual legal text. ADU requirements, subdivision exemptions, agritourism rules — cited by section number."
-            />
-            <CapabilityCard
-              title="Policy-to-Code Tracing"
-              description="Connect General Plan goals to their implementing code sections. Useful for staff reports, CEQA findings, and explaining 'why' behind decisions."
-            />
-            <CapabilityCard
-              title="Staffing & Budget Analysis"
-              description="Find how many positions exist county-wide by title, compare department budgets, or trace resources to functions. Data-driven justifications for Board presentations."
-            />
-            <CapabilityCard
-              title="Visual Map Interpretation"
-              description="AI that looks at maps, not just queries data. 'Where exactly does the flood zone cross this parcel?' answered by analyzing the actual overlay — not just returning a zone code."
-            />
-            <CapabilityCard
-              title="Board Decision Tracking"
-              description="Search BOS and ReGIS meeting minutes by topic. Find what was already approved, link resolutions to implementation, avoid redundant requests."
-            />
-            <CapabilityCard
-              title="Complete Property Profiles"
-              description="One address returns ownership, assessed value, zoning, flood zone, fire hazard, all serving districts, and relevant policies. No more querying six different layers."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Site Selection Demo */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-xs font-semibold uppercase tracking-wider mb-4">
-                AI + Interactive Map
-              </div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                From Analysis to Exploration
-              </h2>
-              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                SAGE doesn't just answer questions — it sets you up for discovery. The AI and user share the same interactive map, with the AI controlling layers, highlights, and navigation while you explore alongside it.
-              </p>
-
-              <div className="bg-white rounded-xl border border-slate-200 p-5 mb-6 shadow-sm">
-                <p className="text-sm font-medium text-slate-500 uppercase tracking-wide mb-2">Example Query</p>
-                <p className="text-slate-800 font-medium">
-                  "Find 20+ acre parcels in Suisun Valley zoned for wineries, outside flood zones."
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center text-sm font-bold text-teal-700">1</div>
-                  <p className="text-slate-600"><strong className="text-slate-800">Search</strong> — Queries 163 matching parcels from Assessor data</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center text-sm font-bold text-teal-700">2</div>
-                  <p className="text-slate-600"><strong className="text-slate-800">Filter</strong> — Checks flood zones, eliminates high-risk parcels</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center text-sm font-bold text-teal-700">3</div>
-                  <p className="text-slate-600"><strong className="text-slate-800">Visualize</strong> — Highlights candidates on the shared map for you to explore</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <a
-                href={`${MAP_URL}?preset=planning&apn=0027030010,0027040010`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-xl overflow-hidden shadow-2xl border border-slate-200 hover:shadow-3xl transition-shadow group"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/site-selection-map.png"
-                  alt="Interactive map showing multiple parcels highlighted in orange, zoomed to fit all candidates in Suisun Valley"
-                  className="w-full h-auto"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <p className="text-white text-sm font-medium">
-                    Two candidate parcels highlighted in Suisun Valley — 80 and 36 acres, both ASV-20 zoning
-                  </p>
-                  <p className="text-white/70 text-xs mt-1 group-hover:text-white transition-colors">
-                    Click to open interactive map &rarr;
-                  </p>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Architecture */}
-      <section className="py-20 bg-white border-t border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="architecture" className="py-20 bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Architecture</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Four independent services, each with a clear purpose and failure boundary.
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Four independent services, each deployed separately on Vercel. Each has a clear
+              data scope and failure boundary — if one service goes down, the others continue working.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6 mb-10">
             <ArchCard
-              name="sage-gov"
-              count={31}
-              description="Public records — budget, county code, general plan, org chart, meeting minutes. All local data, zero external APIs."
-              color="emerald"
+              name="sage-web"
+              count={0}
+              description="Chat UI and AI orchestration. Connects to both MCP servers, embeds the interactive map, manages screenshots for AI vision. This is where authentication, disclaimers, and rate limiting live."
+              color="violet"
             />
             <ArchCard
               name="sage-gis"
               count={28}
-              description="Spatial queries — parcels, zoning, hazards, directions, static maps. Queries ArcGIS REST services."
+              description="Spatial queries — parcels, zoning, hazards, elevation, directions, map rendering, image generation. Queries public ArcGIS REST services. Read-only."
               color="blue"
+            />
+            <ArchCard
+              name="sage-gov"
+              count={31}
+              description="Public records — budget, county code, general plan, org chart, meeting minutes. All data is static JSON bundled at deploy time. Zero external API calls at runtime."
+              color="emerald"
             />
             <ArchCard
               name="sage-map"
               count={0}
-              description="Interactive ArcGIS map embedded as iframe. AI and user share the same view via postMessage."
+              description="Interactive ArcGIS map (@arcgis/core 4.34). Embedded as iframe, controlled via postMessage. No AI, no MCP tools — pure visualization."
               color="amber"
             />
-            <ArchCard
-              name="sage-web"
-              count={0}
-              description="Chat UI + AI orchestration. Connects to both MCP servers, embeds the map, manages screenshots."
-              color="violet"
-            />
+          </div>
+
+          <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <h3 className="font-semibold text-slate-900 mb-4">Key design decisions</h3>
+            <ul className="space-y-3 text-sm text-slate-600">
+              <li className="flex items-start gap-2">
+                <span className="text-teal-600 mt-0.5">•</span>
+                <span><strong className="text-slate-800">MCP protocol</strong> — sage-gis and sage-gov are standard Model Context Protocol servers. Any MCP-compatible AI client can consume them, not just sage-web.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-teal-600 mt-0.5">•</span>
+                <span><strong className="text-slate-800">No shared database</strong> — Services communicate only through MCP tool calls and postMessage. No shared state to corrupt.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-teal-600 mt-0.5">•</span>
+                <span><strong className="text-slate-800">Public data only</strong> — Every data source SAGE queries is already publicly available. No access to internal networks, employee records, or financial systems.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-teal-600 mt-0.5">•</span>
+                <span><strong className="text-slate-800">Model-agnostic tools</strong> — The MCP servers work with Claude, GPT, Gemini, or any future model. The AI provider is a configuration choice, not a structural dependency.</span>
+              </li>
+            </ul>
+            <div className="mt-5 pt-4 border-t border-slate-100">
+              <a href={DOCS_URL} className="text-sm font-medium text-teal-600 hover:text-teal-700 transition-colors">
+                Full architecture documentation &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -339,13 +321,20 @@ export default function Home() {
               <span className="text-slate-600">/</span>
               <span className="text-sm text-slate-400">Solano Agent for Geographic Enquiry</span>
             </div>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-500">
               Built by Ryan Pream.
             </p>
+            <p className="text-sm text-slate-600 mt-1">
+              Not affiliated with Solano County. For demonstration purposes only.
+            </p>
           </div>
-          <div className="text-sm text-slate-600">
-            <p>Data sources: Solano County, CAL FIRE, FEMA, CGS.</p>
-            <p className="mt-1 opacity-60">Not affiliated with Solano County. For demonstration purposes only.</p>
+          <div className="text-sm text-slate-500 text-center sm:text-right">
+            <p>Data: Solano County GIS, CAL FIRE, FEMA, CGS, USGS</p>
+            <p className="mt-1">
+              <a href={DOCS_URL} className="text-slate-400 hover:text-slate-300 transition-colors">Documentation</a>
+              <span className="mx-2 text-slate-700">·</span>
+              <a href="https://github.com/solano-gis" className="text-slate-400 hover:text-slate-300 transition-colors">GitHub</a>
+            </p>
           </div>
         </div>
       </footer>
@@ -366,26 +355,9 @@ function FeatureItem({ children }: { children: ReactNode }) {
   );
 }
 
-function ScenarioCard({ icon, title, question, result }: { icon: string; title: string; question: string; result: string }) {
-  return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
-      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl mb-4">
-        <span dangerouslySetInnerHTML={{ __html: icon }} />
-      </div>
-      <h3 className="font-bold text-slate-900 mb-3">{title}</h3>
-      <div className="bg-slate-50 rounded-lg p-3 mb-4">
-        <p className="text-sm font-medium text-slate-700 font-mono">&ldquo;{question}&rdquo;</p>
-      </div>
-      <p className="text-sm text-slate-600 leading-relaxed">
-        <span className="font-semibold text-teal-700">Result:</span> {result}
-      </p>
-    </div>
-  );
-}
-
 function CapabilityCard({ title, description }: { title: string; description: string }) {
   return (
-    <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 hover:border-teal-200 hover:bg-teal-50/30 transition-all">
+    <div className="bg-white rounded-xl p-5 border border-slate-200 hover:border-slate-300 transition-all">
       <h4 className="font-semibold text-slate-900 mb-2">{title}</h4>
       <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
     </div>
